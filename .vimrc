@@ -134,13 +134,12 @@
     " Setting for GUI
     if has('gui_running')
         set guioptions-=T
-        set t_Co=256
+        set columns=143 lines=50
     endif
 
-    set guioptions-=T
     set t_Co=256
     set background=dark                 " set a dark background
-    colorscheme Mustang                 " load a colorscheme
+    colorscheme wombat                 " load a colorscheme
 
     " Set encoding and default language
     set encoding=utf8
@@ -276,9 +275,9 @@
 " }
 
 " Python {
-    au FileType python set nocindent
+    " au FileType python set nocindent
     let python_highlight_all = 1
-    au FileType python syn keyword pythonDecorator True None False self
+    " au FileType python syn keyword pythonDecorator True None False self
 
     au BufNewFile,BufRead *.jinja set syntax=htmljinja
     au BufNewFile,BufRead *.mako set ft=mako

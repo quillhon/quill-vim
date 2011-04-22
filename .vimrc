@@ -3,7 +3,7 @@
 "
 " Version: 0.2 - 22/04/11
 "
-" GitHub: https://github.com/quillhon/dotVim
+" GitHub: https://github.com/quillhon/quill-vim
 "
 " Sections:
 "   -> Enviroment
@@ -44,7 +44,7 @@
 "
 " Revisions:
 "   > 0.1: First Version
-"   > 0.2: Slim Unless Function
+"   > 0.2: Slim Useless Function
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -108,11 +108,11 @@
         set laststatus=2
 
         set statusline=%<%F             " Filename
-        set statusline+=%m%r%h%w%y      " Options
+        set statusline+=\ %m%r%h%w%y      " Options
         set statusline+=\ %{&ff}        " Filetype
-        set statusline+=\ %{strftime(\"%d-%m-%Y\ %H:%M\")}  " Modify Time
+        " set statusline+=\ %{strftime(\"%d-%m-%Y\ %H:%M\")}  " Modify Time
         set statusline+=%=              " Align mark
-        set statusline+=\ col:%c%V\ lin:%l\,%L\ %P\         " cursor current info
+        set statusline+=\ Col:\ %c%V\ Line:\ %l\/%L\[%P\]\          " cursor current info
     " }
 
     " No sound on errors
@@ -137,6 +137,8 @@
         set t_Co=256
     endif
 
+    set guioptions-=T
+    set t_Co=256
     set background=dark                 " set a dark background
     colorscheme Mustang                 " load a colorscheme
 
@@ -174,8 +176,12 @@
 
 
 " Visual Mode {
-    "  In visual mode when you press * or # to search for the current selection
-    vnoremap <silent> * :call VisualSearch('f')<CR>
+    " Visual shifting without exiting Visual mode
+    vnoremap < <gv
+    vnoremap > >gv
+
+    " In visual mode when you press * or # to search for the current selection
+    vnoremap <silent> * :call VisualSearch('f')<cr>
 
     function! CmdLine(str)
         exe "menu Foo.Bar :" . a:str
@@ -222,10 +228,10 @@
 
     " Windows {
         " Smart way to move between windows
-        map <C-j> <C-W>j
-        map <C-k> <C-W>k
-        map <C-h> <C-W>h
-        map <C-l> <C-W>l
+        map <c-j> <c-w>j
+        map <c-k> <c-w>k
+        map <c-h> <c-w>h
+        map <c-l> <c-w>l
 
         " Close split windows
         map <c-q> <c-w>q
@@ -255,7 +261,7 @@
     vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
     " Remove the Windows ^M - when the encodings gets messed up
-    noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+    noremap <Leader>m mmHmt:%s/<c-v><cr>//ge<cr>'tzt'm
 " }
 
 " Spell Checking {
@@ -305,11 +311,11 @@
 
 " Plugin {
     " Fuzzy Finder {
-        map <c-f> :FufFile<CR>
+        nmap <c-f> :FufFile<cr>
     " }
  
     " NERD Tree {
-        map <c-n> :NERDTreeToggle<CR>
+        nmap <c-n> :NERDTreeToggle<cr>
         cno $nb NERDTreeFromBookmark 
     " }
 
@@ -320,6 +326,6 @@
         let g:ctags_statusline = 1
         let Tlist_Use_Right_Window = 1
 
-        map <c-g> :TlistToggle<CR>
+        nmap <c-g> :TlistToggle<cr>
     " }
 " }

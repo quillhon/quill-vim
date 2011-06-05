@@ -27,6 +27,9 @@
 "   > FuzzyFinder.vim - http://www.vim.org/scripts/script.php?script_id=1984
 "   Fuzzy/Partial pattern explorer for buffer/file/MRU/command/bookmark/tag/etc.
 "
+"   > minibufexpl.vim - https://github.com/fholgado/minibufexpl.vim
+"   Elegant buffer explorer
+"
 "   > NERDTree.vim - http://www.vim.org/scripts/script.php?script_id=1658
 "   The NERD tree allows you to explore your filesystem and to open files and directories.
 "
@@ -83,7 +86,7 @@
     set magic                           " set magic on, for regular expressions
     set showmode                        " indicates input or replace mode at bottom
     set number                          " show line number
-    set mat=2                           " how many tenths of a second to blink
+    " set mat=1000                           " how many tenths of a second to blink
 
     " Wildmenu {
         " show completion in command mode
@@ -279,6 +282,8 @@
     let python_highlight_all = 1
     " au FileType python syn keyword pythonDecorator True None False self
 
+    au FileType python set colorcolumn=80
+
     au BufNewFile,BufRead *.jinja set syntax=htmljinja
     au BufNewFile,BufRead *.mako set ft=mako
 
@@ -313,7 +318,12 @@
         nmap <c-f> :FufFile<cr>
     " }
  
+    " MiniBufExplorer {
+        map <c-b> :TMiniBufExplorer<cr>
+    " }
+    "
     " NERD Tree {
+        let NERDTreeIgnore=['\.pyc$']
         nmap <c-n> :NERDTreeToggle<cr>
         cno $nb NERDTreeFromBookmark 
     " }

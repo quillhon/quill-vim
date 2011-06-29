@@ -319,7 +319,7 @@
     " }
  
     " MiniBufExplorer {
-        map <c-b> :TMiniBufExplorer<cr>
+        map <f3> :TMiniBufExplorer<cr>
     " }
     
     " NERD Tree {

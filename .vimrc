@@ -314,17 +314,21 @@
 " }
 
 " Plugin {
+    " ********************************
+    "  Use <fx> key to toggle plugins
+    " ********************************
+
     " Fuzzy Finder {
-        nmap <c-f> :FufFile<cr>
+        nmap <f5> :FufFile<cr>
     " }
  
     " MiniBufExplorer {
-        map <f3> :TMiniBufExplorer<cr>
+        map <f4> :TMiniBufExplorer<cr>
     " }
     
     " NERD Tree {
         let NERDTreeIgnore=['\.pyc$']
-        nmap <c-n> :NERDTreeToggle<cr>
+        nmap <f2> :NERDTreeToggle<cr>
         cno $nb NERDTreeFromBookmark 
     " }
 
@@ -332,7 +336,7 @@
         " configure tags - add additional tags here or comment out not-used ones
         set tags+=~/.vim/bundle/tags/cpp
         " build tags of your own project with Ctrl-F12
-        map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+        map <c-f12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
 
         " OmniCppComplete
         let OmniCpp_NamespaceSearch = 1
@@ -355,6 +359,6 @@
         let g:ctags_statusline = 1
         let Tlist_Use_Right_Window = 1
 
-        nmap <c-g> :TlistToggle<cr>
+        nmap <f3> :TlistToggle<cr>
     " }
 " }

@@ -6,7 +6,7 @@
 " GitHub: https://github.com/quillhon/quill-vim
 "
 " Sections:
-"   -> Enviroment
+"   -> Vundle
 "   -> General
 "   -> VIM User Interface
 "   -> Colors and Fonts
@@ -18,43 +18,86 @@
 "   -> Editing Mappings
 "
 "   -> Python section
-"   -> JavaScript section
 "
-"   -> Plugin
+"   -> Plugin Configuration
 "
 " Plugins_Included:
 "
-"   > FuzzyFinder.vim - http://www.vim.org/scripts/script.php?script_id=1984
+"   All plugins are managed by Vundle
+"
+"   > python
+"   Enhanced version of the original (from vim6.1) python.vim for Python programming language
+"
+"   > L9
+"   l9 is a Vim-script library, which provides some utility functions and commands for programming in Vim. 
+"
+"   > FuzzyFinder
 "   Fuzzy/Partial pattern explorer for buffer/file/MRU/command/bookmark/tag/etc.
 "
-"   > minibufexpl.vim - https://github.com/fholgado/minibufexpl.vim
-"   Elegant buffer explorer
-"
-"   > NERDTree.vim - http://www.vim.org/scripts/script.php?script_id=1658
-"   The NERD tree allows you to explore your filesystem and to open files and directories.
-"
-"   > snipMate.vim - http://www.vim.org/scripts/script.php?script_id=2540
-"   Snippets for many languages (similar to TextMate's):
-"           
-"   > surround.vim - http://www.vim.org/scripts/script.php?script_id=1697
-"   Makes it easy to work with surrounding text:
-"
-"   > taglist.vim - http://www.vim.org/scripts/script.php?script_id=273
+"   > taglist
 "   The 'Tag List' plugin is a source code browser for the Vim editor
 "
-"   > tComment.vim - http://www.vim.org/scripts/script.php?script_id=273
+"   > NERDTree
+"   The NERD tree allows you to explore your filesystem and to open files and directories.
+"
+"   > minibufexpl
+"   Elegant buffer explorer
+"
+"   > snipMate
+"   Snippets for many languages (similar to TextMate's):
+"           
+"   > SuperTab
+"   Supertab aims to provide tab completion to satisfy all your insert completion
+"
+"   > surround
+"   Makes it easy to work with surrounding text:
+"           
+"   > OmniCppComplete
+"   You can use the omni completion (intellisense) in C and C++ files
+"
+"   > tComment
 "   An extensible & universal comment vim-plugin that also handles embedded filetypes
 "
 " Revisions:
 "   > 0.1: First Version
 "   > 0.2: Slim Useless Function
+"   > 0.3: Cut plugin for programming language
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Environment {
-    " Pathogen {
-        " Load pathogen for bundle support
-        call pathogen#runtime_append_all_bundles()
+" Vundle {
+    " Basic Configation {
+        set nocompatible               " be iMproved
+        filetype off                   " required!
+
+        set rtp+=~/.vim/bundle/vundle/
+        call vundle#rc()
+
+        " Manage Vundle by Vundle
+        Bundle "gmarik/vundle"
+    " }
+
+    " Install Plugin {
+
+        " Syntax highlight
+        Bundle 'python.vim'
+        
+        " Browse
+        Bundle "L9"
+        Bundle "FuzzyFinder"
+        Bundle "taglist.vim"
+        Bundle 'The-NERD-tree'
+        Bundle 'minibufexpl.vim'
+
+        " Coding
+        Bundle 'snipMate'
+        Bundle 'SuperTab-continued.'
+        Bundle "surround.vim"
+        Bundle 'OmniCppComplete'
+
+        " Comment
+        Bundle "tComment"
+
     " }
 " }
 
@@ -213,8 +256,6 @@
 " }
 
 " Command Mode {
-    " Close the current buffer
-    cno $bc Kwbd<cr>        " need bclose.vim plugin
 
     " Smart mappings on the command line
     cno $c e <C-\>eCurrentFileDir("e")<cr>
@@ -296,23 +337,6 @@
     autocmd BufWrite *.py :call DeleteTrailingWS()
 " }
 
-" JavaScript {
-    au FileType javascript call JavaScriptFold()
-    au FileType javascript setl fen
-    au FileType javascript setl nocindent
-
-    function! JavaScriptFold() 
-        setl foldmethod=syntax
-        setl foldlevelstart=1
-        syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-
-        function! FoldText()
-        return substitute(getline(v:foldstart), '{.*', '{...}', '')
-        endfunction
-        setl foldtext=FoldText()
-    endfunction
-" }
-
 " Plugin {
     " ********************************
     "  Use <fx> key to toggle plugins
@@ -354,7 +378,7 @@
 
     " Taglist {
         " Need to install ctags
-        let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+        let Tlist_Ctags_Cmd = "ctags"       " edit the path of ctags
 
         let g:ctags_statusline = 1
         let Tlist_Use_Right_Window = 1

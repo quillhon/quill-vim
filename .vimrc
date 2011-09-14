@@ -1,7 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: QuiLl HoN
 "
-" Version: 0.2 - 22/04/11
+" Version: 0.3 - 14/09/11
 "
 " GitHub: https://github.com/quillhon/quill-vim
 "
@@ -61,13 +61,34 @@
 " Revisions:
 "   > 0.1: First Version
 "   > 0.2: Slim Useless Function
-"   > 0.3: Cut plugin for programming language
+"   > 0.3: Change The Bundle management tools to Vundle
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" General {
+    " be iMproved
+    set nocompatible
+
+    " Sets how many lines of history VIM has to remember
+    set history=700
+
+    " Enable filetype plugin
+    filetype plugin on
+    filetype indent on
+
+    " Set to auto read when a file is changed from the outside
+    set autoread
+
+    " With a map leader it's possible to do extra key combinations
+    let mapleader = ","
+    let g:mapleader = ","
+
+    " Fast editing of the .vimrc
+    map <leader>e :e! ~/.vimrc<cr>
+" }
+
 " Vundle {
     " Basic Configation {
-        set nocompatible               " be iMproved
         filetype off                   " required!
 
         set rtp+=~/.vim/bundle/vundle/
@@ -100,27 +121,6 @@
 
     " }
 " }
-
-
-" General {
-    " Sets how many lines of history VIM has to remember
-    set history=700
-
-    " Enable filetype plugin
-    filetype plugin on
-    filetype indent on
-
-    " Set to auto read when a file is changed from the outside
-    set autoread
-
-    " With a map leader it's possible to do extra key combinations
-    let mapleader = ","
-    let g:mapleader = ","
-
-    " Fast editing of the .vimrc
-    map <leader>e :e! ~/.vimrc<cr>
-" }
-
 
 " VIM User Interface {
     set scrolloff=7                     " set 7 lines to the curors - when moving vertical..
@@ -224,39 +224,9 @@
     " Visual shifting without exiting Visual mode
     vnoremap < <gv
     vnoremap > >gv
-
-    " In visual mode when you press * or # to search for the current selection
-    vnoremap <silent> * :call VisualSearch('f')<cr>
-
-    function! CmdLine(str)
-        exe "menu Foo.Bar :" . a:str
-        emenu Foo.Bar
-        unmenu Foo
-    endfunction 
-
-    " From an idea by Michael Naumann
-    function! VisualSearch(direction) range
-        let l:saved_reg = @"
-        execute "normal! vgvy"
-
-        let l:pattern = escape(@", '\\/.*$^~[]')
-        let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-        if a:direction == 'b'
-            execute "normal ?" . l:pattern . "^M"
-        elseif a:direction == 'gv'
-            call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-        elseif a:direction == 'f'
-            execute "normal /" . l:pattern . "^M"
-        endif
-
-        let @/ = l:pattern
-        let @" = l:saved_reg
-    endfunction
 " }
 
 " Command Mode {
-
     " Smart mappings on the command line
     cno $c e <C-\>eCurrentFileDir("e")<cr>
 
@@ -275,9 +245,6 @@
         map <c-k> <c-w>k
         map <c-h> <c-w>h
         map <c-l> <c-w>l
-
-        " Close split windows
-        map <c-q> <c-w>q
     " }
 
     " Buffer {
@@ -338,21 +305,20 @@
 " }
 
 " Plugin {
-    " ********************************
-    "  Use <fx> key to toggle plugins
-    " ********************************
+    " *Use <leader> key to toggle plugins*
 
     " Fuzzy Finder {
-        nmap <f5> :FufFile<cr>
+        map <leader>f :FufFile<cr>
     " }
  
     " MiniBufExplorer {
-        map <f4> :TMiniBufExplorer<cr>
+        map <leader>b :TMiniBufExplorer<cr>
     " }
     
     " NERD Tree {
         let NERDTreeIgnore=['\.pyc$']
-        nmap <f2> :NERDTreeToggle<cr>
+
+        map <leader>n :NERDTreeToggle<cr>
         cno $nb NERDTreeFromBookmark 
     " }
 
@@ -360,7 +326,7 @@
         " configure tags - add additional tags here or comment out not-used ones
         set tags+=~/.vim/bundle/tags/cpp
         " build tags of your own project with Ctrl-F12
-        map <c-f12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
+        map <F2> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
 
         " OmniCppComplete
         let OmniCpp_NamespaceSearch = 1
@@ -383,6 +349,6 @@
         let g:ctags_statusline = 1
         let Tlist_Use_Right_Window = 1
 
-        nmap <f3> :TlistToggle<cr>
+        nmap <leader>l :TlistToggle<cr>
     " }
 " }

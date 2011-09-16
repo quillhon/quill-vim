@@ -93,10 +93,15 @@
         Bundle 'snipMate'
         Bundle 'SuperTab-continued.'
         Bundle "surround.vim"
-        Bundle 'OmniCppComplete'
 
         " Comment
         Bundle "tComment"
+
+        " Python
+        "Bundle 'Pydiction'
+
+        " C++
+        Bundle 'OmniCppComplete'
 
     " }
 " }
@@ -358,7 +363,7 @@
 
     " Omni Cpp Complete {
         " configure tags - add additional tags here or comment out not-used ones
-        set tags+=~/.vim/bundle/tags/cpp
+        set tags+=~/.vim/tags/cpp
         " build tags of your own project with Ctrl-F12
         map <c-f12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
 

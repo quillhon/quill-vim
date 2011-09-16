@@ -104,22 +104,23 @@
         Bundle 'python.vim'
         
         " Browse
-        Bundle "L9"
-        Bundle "FuzzyFinder"
-        Bundle "taglist.vim"
+        Bundle 'L9'
+        Bundle 'FuzzyFinder'
+        Bundle 'taglist.vim'
         Bundle 'The-NERD-tree'
         Bundle 'minibufexpl.vim'
 
         " Coding
-        Bundle 'snipMate'
+        Bundle 'quillhon/snipMate'
         Bundle 'SuperTab-continued.'
-        Bundle "surround.vim"
+        Bundle 'surround.vim'
+        Bundle 'AutoComplPop'
 
         " Comment
-        Bundle "tComment"
+        Bundle 'tComment'
 
         " Python
-        "Bundle 'Pydiction'
+        Bundle 'pythoncomplete'
 
         " C++
         Bundle 'OmniCppComplete'
@@ -355,5 +356,9 @@
         let Tlist_Use_Right_Window = 1
 
         nmap <leader>l :TlistToggle<cr>
+    " }
+    
+    " AutoComplPop {
+        let g:acp_behaviorSnipmateLength=1
     " }
 " }

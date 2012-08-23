@@ -190,8 +190,8 @@
     endif
 
     set t_Co=256
-    set background=light                " set a dark background
-    colorscheme hemisu                  " load a colorscheme
+    set background=dark                 " set a dark background
+    colorscheme solarized               " load a colorscheme
 
     " Set encoding and default language
     set encoding=utf8

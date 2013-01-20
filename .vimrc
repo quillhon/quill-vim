@@ -43,6 +43,10 @@
 "   > minibufexpl
 "   Elegant buffer explorer
 "
+"   > Powerline
+"   Powerline is a utility plugin which allows you to create better-looking, 
+"   more functional vim statuslines.
+"
 "   > snipMate
 "   Snippets for many languages (similar to TextMate's):
 "           
@@ -50,18 +54,29 @@
 "   Supertab aims to provide tab completion to satisfy all your insert completion
 "
 "   > surround
-"   Makes it easy to work with surrounding text:
+"   Makes it easy to work with surrounding text.
 "           
-"   > OmniCppComplete
-"   You can use the omni completion (intellisense) in C and C++ files
+"   > AutoComplPop
+"   With this plugin, your vim comes to automatically opens popup menu for 
+"   completions when you enter characters or move the cursor in Insert mode.
+"
+"   > MatchTag
+"   This plugin highlights the matching HTML tag when the cursor is positioned on a tag.
 "
 "   > tComment
 "   An extensible & universal comment vim-plugin that also handles embedded filetypes
+"
+"   > pythoncomplete
+"   This is the pythoncomplete omni-completion script shipped with vim 7.
+"
+"   > OmniCppComplete
+"   You can use the omni completion (intellisense) in C and C++ files
 "
 " Revisions:
 "   > 0.1: First Version
 "   > 0.2: Slim Useless Function
 "   > 0.3: Change The Bundle management tools to Vundle
+"   > 0.4: Add few plugin and configure for powerline
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -109,12 +124,14 @@
         Bundle 'taglist.vim'
         Bundle 'The-NERD-tree'
         Bundle 'minibufexpl.vim'
+        Bundle 'Lokaltog/vim-powerline'
 
         " Coding
         Bundle 'quillhon/snipMate'
         Bundle 'SuperTab-continued.'
         Bundle 'surround.vim'
         Bundle 'AutoComplPop'
+        Bundle 'gregsexton/MatchTag'
 
         " Comment
         Bundle 'tComment'
@@ -181,7 +198,9 @@
         set shell=/bin/bash
     endif
 
-    set guifont=Monaco\ 9               " need to install
+    " Website for downloading the patched font:
+    " https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts
+    set guifont=Menlo-Powerline               " need to install
 
     " Setting for GUI
     if has('gui_running')
@@ -360,5 +379,9 @@
     
     " AutoComplPop {
         let g:acp_behaviorSnipmateLength=1
+    " }
+ 
+    " Powerline {
+        let g:Powerline_symbols = 'fancy'
     " }
 " }

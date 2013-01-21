@@ -12,10 +12,10 @@ A [Tag List](http://www.vim.org/scripts/script.php?script_id=273) plugin needs [
     
 You can download the zip file or clone the repository from GitHub.
 
-    git clone git://github.com/quillhon/quill-vim.git
+    git clone --recursive git://github.com/quillhon/quill-vim.git
     
 Use ln -s on Mac/Unix
 
     cd ~
-    ln -s /path/to/quill-vim/.vimrc .vimrc
-    ln -s /path/to/quill-vim/.vim .vim
+    ln -s /path/to/quill-vim/.vimrc vimrc
+    ln -s /path/to/quill-vim/.vim vim

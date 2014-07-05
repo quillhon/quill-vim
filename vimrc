@@ -34,9 +34,6 @@
 "   > FuzzyFinder
 "   Fuzzy/Partial pattern explorer for buffer/file/MRU/command/bookmark/tag/etc.
 "
-"   > taglist
-"   The 'Tag List' plugin is a source code browser for the Vim editor
-"
 "   > NERDTree
 "   The NERD tree allows you to explore your filesystem and to open files and directories.
 "
@@ -50,27 +47,14 @@
 "   > snipMate
 "   Snippets for many languages (similar to TextMate's):
 "           
-"   > SuperTab
-"   Supertab aims to provide tab completion to satisfy all your insert completion
-"
 "   > surround
 "   Makes it easy to work with surrounding text.
 "           
-"   > AutoComplPop
-"   With this plugin, your vim comes to automatically opens popup menu for 
-"   completions when you enter characters or move the cursor in Insert mode.
-"
 "   > MatchTag
 "   This plugin highlights the matching HTML tag when the cursor is positioned on a tag.
 "
 "   > tComment
 "   An extensible & universal comment vim-plugin that also handles embedded filetypes
-"
-"   > pythoncomplete
-"   This is the pythoncomplete omni-completion script shipped with vim 7.
-"
-"   > OmniCppComplete
-"   You can use the omni completion (intellisense) in C and C++ files
 "
 " Revisions:
 "   > 0.1: First Version
@@ -79,10 +63,50 @@
 "   > 0.4: Add few plugin and configure for powerline
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" be iMproved
+set nocompatible
+
+" Vundle {
+    " Basic Configation {
+        filetype off                   " required!
+
+        set rtp+=~/.vim/bundle/Vundle.vim
+        call vundle#begin()
+
+        " Manage Vundle by Vundle
+        Plugin 'gmarik/Vundle.vim'
+    " }
+
+    " Install Plugin {
+
+        " Syntax highlight
+        Plugin 'python.vim'
+        
+        " Browse
+        Plugin 'L9'
+        Plugin 'FuzzyFinder'
+        Plugin 'taglist.vim'
+        Plugin 'The-NERD-tree'
+        Plugin 'minibufexpl.vim'
+        Plugin 'Lokaltog/vim-powerline'
+
+        " Coding
+        Plugin 'quillhon/snipMate'
+        Plugin 'surround.vim'
+        Plugin 'gregsexton/MatchTag'
+
+        " Comment
+        Plugin 'tComment'
+
+        " YouCompleteMe
+        Plugin 'Valloric/YouCompleteMe'
+
+    " }
+    
+    call vundle#end()
+" }
 
 " General {
-    " be iMproved
-    set nocompatible
 
     " Sets how many lines of history VIM has to remember
     set history=700
@@ -100,49 +124,6 @@
 
     " Fast editing of the .vimrc
     map <leader>e :e! ~/.vimrc<cr>
-" }
-
-" Vundle {
-    " Basic Configation {
-        filetype off                   " required!
-
-        set rtp+=~/.vim/bundle/vundle/
-        call vundle#rc()
-
-        " Manage Vundle by Vundle
-        Bundle "gmarik/vundle"
-    " }
-
-    " Install Plugin {
-
-        " Syntax highlight
-        Bundle 'python.vim'
-        
-        " Browse
-        Bundle 'L9'
-        Bundle 'FuzzyFinder'
-        Bundle 'taglist.vim'
-        Bundle 'The-NERD-tree'
-        Bundle 'minibufexpl.vim'
-        Bundle 'Lokaltog/vim-powerline'
-
-        " Coding
-        Bundle 'quillhon/snipMate'
-        Bundle 'SuperTab-continued.'
-        Bundle 'surround.vim'
-        Bundle 'AutoComplPop'
-        Bundle 'gregsexton/MatchTag'
-
-        " Comment
-        Bundle 'tComment'
-
-        " Python
-        Bundle 'pythoncomplete'
-
-        " C++
-        Bundle 'OmniCppComplete'
-
-    " }
 " }
 
 " VIM User Interface {
@@ -347,26 +328,6 @@
         cno $nb NERDTreeFromBookmark 
     " }
 
-    " Omni Cpp Complete {
-        " configure tags - add additional tags here or comment out not-used ones
-        set tags+=~/.vim/tags/cpp
-        " build tags of your own project with Ctrl-F12
-        map <F2> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
-
-        " OmniCppComplete
-        let OmniCpp_NamespaceSearch = 1
-        let OmniCpp_GlobalScopeSearch = 1
-        let OmniCpp_ShowAccess = 1
-        let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-        let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-        let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-        let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-        let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-        " automatically open and close the popup menu / preview window
-        au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-        set completeopt=menuone,menu,longest,preview
-    " }
-
     " Taglist {
         " Need to install ctags
         let Tlist_Ctags_Cmd = "ctags"       " edit the path of ctags
@@ -375,10 +336,6 @@
         let Tlist_Use_Right_Window = 1
 
         nmap <leader>l :TlistToggle<cr>
-    " }
-    
-    " AutoComplPop {
-        let g:acp_behaviorSnipmateLength=1
     " }
  
     " Powerline {

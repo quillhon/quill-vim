@@ -101,6 +101,9 @@ set nocompatible
         " YouCompleteMe
         Plugin 'Valloric/YouCompleteMe'
 
+        " Color Scheme
+        Plugin altercation/vim-colors-solarized
+
     " }
     
     call vundle#end()

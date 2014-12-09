@@ -102,7 +102,7 @@ set nocompatible
         Plugin 'Valloric/YouCompleteMe'
 
         " Color Scheme
-        Plugin altercation/vim-colors-solarized
+        Plugin 'altercation/vim-colors-solarized'
 
     " }
     

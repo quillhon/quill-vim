@@ -94,6 +94,7 @@ set nocompatible
         Plugin 'quillhon/snipMate'
         Plugin 'surround.vim'
         Plugin 'gregsexton/MatchTag'
+        Plugin 'scrooloose/syntastic'
 
         " Comment
         Plugin 'tComment'
@@ -311,6 +312,13 @@ set nocompatible
       exe "normal `z"
     endfunc
     autocmd BufWrite *.py :call DeleteTrailingWS()
+" }
+
+" Javascript {
+    au FileType javascript set shiftwidth=2
+    au FileType javascript set tabstop=2
+
+    let g:syntastic_javascript_checkers = ['eslint']
 " }
 
 " Plugin {

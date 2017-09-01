@@ -99,11 +99,9 @@ set nocompatible
         " Comment
         Plugin 'tComment'
 
-        " YouCompleteMe
-        Plugin 'Valloric/YouCompleteMe'
-
         " Color Scheme
         Plugin 'altercation/vim-colors-solarized'
+        Plugin 'posva/vim-vue'
 
     " }
     
@@ -318,7 +316,10 @@ set nocompatible
     au FileType javascript set shiftwidth=2
     au FileType javascript set tabstop=2
 
-    let g:syntastic_javascript_checkers = ['eslint']
+    au FileType vue.html.javascript.css set shiftwidth=2
+    au FileType vue.html.javascript.css set tabstop=2
+
+    autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }
 
 " Plugin {
@@ -351,5 +352,19 @@ set nocompatible
  
     " Powerline {
         let g:Powerline_symbols = 'fancy'
+    " }
+    
+    " Syntastic {
+        set statusline+=%#warningmsg#
+        set statusline+=%{SyntasticStatuslineFlag()}
+        set statusline+=%*
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_auto_loc_list = 1
+        let g:syntastic_check_on_open = 0
+        let g:syntastic_check_on_wq = 0
+
+        let g:syntastic_javascript_checkers = ['eslint']
+        let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+        let g:syntastic_javascript_eshint_quiet_messages = { "level": "warnings" }
     " }
 " }

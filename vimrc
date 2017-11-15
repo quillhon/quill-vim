@@ -74,15 +74,23 @@ set nocompatible
         Plug 'junegunn/fzf.vim'
         Plug 'scrooloose/nerdtree'
         Plug 'bling/vim-airline'
+        Plug 'valloric/matchtagalways'
+        Plug 'tpope/vim-fugitive'
 
         " Syntax
         Plug 'pangloss/vim-javascript'
         Plug 'mxw/vim-jsx'
         Plug 'posva/vim-vue'
+        Plug 'ekalinin/dockerfile.vim'
+        Plug 'stanangeloff/php.vim'
 
         " Coding
         Plug 'w0rp/ale'
         Plug 'tpope/vim-surround'
+        Plug 'Shougo/deoplete.nvim'
+        Plug 'roxma/nvim-yarp'
+        Plug 'roxma/vim-hug-neovim-rpc'
+
 
         " Color Scheme
         Plug 'altercation/vim-colors-solarized'
@@ -110,6 +118,9 @@ set nocompatible
 
     " Fast editing of the .vimrc
     map <leader>e :e! ~/.vimrc<cr>
+
+    " Don't add the comment prefix when I hit enter or o/O on a comment line.
+    autocmd FileType * setlocal formatoptions-=r formatoptions-=o
 " }
 
 " VIM User Interface {
@@ -138,17 +149,6 @@ set nocompatible
         set ruler                       " show the ruler
         set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
 		set showcmd
-    " }
-
-    " Statusline {
-        set laststatus=2
-
-        set statusline=%<%F             " Filename
-        set statusline+=\ %m%r%h%w%y      " Options
-        set statusline+=\ %{&ff}        " Filetype
-        " set statusline+=\ %{strftime(\"%d-%m-%Y\ %H:%M\")}  " Modify Time
-        set statusline+=%=              " Align mark
-        set statusline+=\ Col:\ %c%V\ Line:\ %l\/%L\[%P\]\          " cursor current info
     " }
 
     " No sound on errors
@@ -185,14 +185,12 @@ set nocompatible
     set ffs=unix,dos,mac                " default file types
 " }
 
-
 " Files and Backups {
     " Turn backup off.
     set nobackup
     set nowb
     set noswapfile
 " }
-
 
 " Formatting {
     set autoindent      " indent at the same level of the previous line
@@ -295,13 +293,15 @@ set nocompatible
 " Javascript {
     au FileType javascript set shiftwidth=2
     au FileType javascript set tabstop=2
-
-    au FileType vue.html.javascript.css set shiftwidth=2
-    au FileType vue.html.javascript.css set tabstop=2
 " }
 
 " Plugin {
     " *Use <leader> key to toggle plugins*
+
+    " fzf {
+        nmap <leader>f :Files<cr>
+        nmap <leader>b :Buffers<cr>
+    " }
 
     " NERD Tree {
         let NERDTreeIgnore=['\.pyc$']
@@ -326,10 +326,15 @@ set nocompatible
 
     " vim-vue {
         autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+        au FileType vue.html.javascript.css set shiftwidth=2
+        au FileType vue.html.javascript.css set tabstop=2
     " }
     
     " ale {
         let g:ale_lint_on_save = 1
         let g:ale_lint_on_text_changed = 0
+
+        let g:airline#extensions#ale#enabled = 1
     " }
 " }

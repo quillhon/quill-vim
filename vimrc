@@ -1,12 +1,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: QuiLl HoN
 "
-" Version: 0.3 - 14/09/11
+" Version: 1.0 - 15/11/17
 "
 " GitHub: https://github.com/quillhon/quill-vim
 "
 " Sections:
-"   -> Vundle
+"   -> Plug
 "   -> General
 "   -> VIM User Interface
 "   -> Colors and Fonts
@@ -23,38 +23,34 @@
 "
 " Plugins_Included:
 "
-"   All plugins are managed by Vundle
-"
-"   > python
-"   Enhanced version of the original (from vim6.1) python.vim for Python programming language
-"
-"   > L9
-"   l9 is a Vim-script library, which provides some utility functions and commands for programming in Vim. 
-"
-"   > FuzzyFinder
-"   Fuzzy/Partial pattern explorer for buffer/file/MRU/command/bookmark/tag/etc.
+"   All plugins are managed by Plug
 "
 "   > NERDTree
-"   The NERD tree allows you to explore your filesystem and to open files and directories.
+"   The NERDTree is a file system explorer for the Vim editor.
 "
-"   > minibufexpl
-"   Elegant buffer explorer
+"   > fzf
+"   fzf is a general-purpose command-line fuzzy finder.
 "
-"   > Powerline
-"   Powerline is a utility plugin which allows you to create better-looking, 
-"   more functional vim statuslines.
+"   > vim-airline
+"   status/tabline for vim that's light as air.
 "
-"   > snipMate
-"   Snippets for many languages (similar to TextMate's):
-"           
-"   > surround
-"   Makes it easy to work with surrounding text.
-"           
-"   > MatchTag
-"   This plugin highlights the matching HTML tag when the cursor is positioned on a tag.
+"   > leshill/vim-json
+"   JSON syntax highlighting
 "
-"   > tComment
-"   An extensible & universal comment vim-plugin that also handles embedded filetypes
+"   > vim-javascript
+"   JavaScript bundle for vim, this bundle provides syntax highlighting and improved indentation.
+"
+"   > vim-jsx
+"   Syntax highlighting and indenting for JSX. JSX is a JavaScript syntax transformer which translates inline XML document fragments into JavaScript objects.
+"
+"   > vim-vue
+"   Vim syntax highlighting for Vue components.
+"
+"   > ale
+"   Asynchronous Lint Engine
+"   
+"   > vim-surround
+"   Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
 "
 " Revisions:
 "   > 0.1: First Version
@@ -66,46 +62,34 @@
 " be iMproved
 set nocompatible
 
-" Vundle {
+" Plug {
     " Basic Configation {
-        filetype off                   " required!
-
-        set rtp+=~/.vim/bundle/Vundle.vim
-        call vundle#begin()
-
-        " Manage Vundle by Vundle
-        Plugin 'gmarik/Vundle.vim'
+        call plug#begin('~/.vim/plugged')
     " }
 
     " Install Plugin {
 
-        " Syntax highlight
-        Plugin 'python.vim'
-        
         " Browse
-        Plugin 'L9'
-        Plugin 'FuzzyFinder'
-        Plugin 'taglist.vim'
-        Plugin 'The-NERD-tree'
-        Plugin 'minibufexpl.vim'
-        Plugin 'Lokaltog/vim-powerline'
+        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+        Plug 'junegunn/fzf.vim'
+        Plug 'scrooloose/nerdtree'
+        Plug 'bling/vim-airline'
+
+        " Syntax
+        Plug 'pangloss/vim-javascript'
+        Plug 'mxw/vim-jsx'
+        Plug 'posva/vim-vue'
 
         " Coding
-        Plugin 'quillhon/snipMate'
-        Plugin 'surround.vim'
-        Plugin 'gregsexton/MatchTag'
-        Plugin 'scrooloose/syntastic'
-
-        " Comment
-        Plugin 'tComment'
+        Plug 'w0rp/ale'
+        Plug 'tpope/vim-surround'
 
         " Color Scheme
-        Plugin 'altercation/vim-colors-solarized'
-        Plugin 'posva/vim-vue'
+        Plug 'altercation/vim-colors-solarized'
 
     " }
     
-    call vundle#end()
+    call plug#end()
 " }
 
 " General {
@@ -135,7 +119,7 @@ set nocompatible
     set magic                           " set magic on, for regular expressions
     set showmode                        " indicates input or replace mode at bottom
     set number                          " show line number
-    " set mat=1000                           " how many tenths of a second to blink
+    " set mat=1000                      " how many tenths of a second to blink
 
     " Wildmenu {
         " show completion in command mode
@@ -178,12 +162,8 @@ set nocompatible
 
     if has('win32') || has('win64')
     else
-        set shell=/bin/bash
+        set shell=/bin/zsh
     endif
-
-    " Website for downloading the patched font:
-    " https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts
-    set guifont=Menlo-Powerline               " need to install
 
     " Setting for GUI
     if has('gui_running')
@@ -245,7 +225,7 @@ set nocompatible
 
 
 " Moving in Tabs and Buffers {
-    map <silent> <leader><cr> :noh<cr>  " map <leader> enter to cancel highlight
+    map <silent> <leader><cr> :noh<cr>  " map <leader>enter to cancel highlight
 
     " Windows {
         " Smart way to move between windows
@@ -318,53 +298,38 @@ set nocompatible
 
     au FileType vue.html.javascript.css set shiftwidth=2
     au FileType vue.html.javascript.css set tabstop=2
-
-    autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }
 
 " Plugin {
     " *Use <leader> key to toggle plugins*
 
-    " Fuzzy Finder {
-        map <leader>f :FufFile<cr>
-    " }
- 
-    " MiniBufExplorer {
-        map <leader>b :TMiniBufExplorer<cr>
-    " }
-    
     " NERD Tree {
         let NERDTreeIgnore=['\.pyc$']
 
         map <leader>n :NERDTreeToggle<cr>
         cno $nb NERDTreeFromBookmark 
     " }
-
-    " Taglist {
-        " Need to install ctags
-        let Tlist_Ctags_Cmd = "ctags"       " edit the path of ctags
-
-        let g:ctags_statusline = 1
-        let Tlist_Use_Right_Window = 1
-
-        nmap <leader>l :TlistToggle<cr>
+    
+    " NERD Tree {
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline#extensions#tabline#left_sep = ' '
+        let g:airline#extensions#tabline#left_alt_sep = '|'
     " }
- 
-    " Powerline {
-        let g:Powerline_symbols = 'fancy'
+
+    " vim-javascript {
+        let g:javascript_plugin_flow = 1
+    " }
+
+    " vim-jsx {
+        let g:jsx_ext_required = 0
+    " }
+
+    " vim-vue {
+        autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
     " }
     
-    " Syntastic {
-        set statusline+=%#warningmsg#
-        set statusline+=%{SyntasticStatuslineFlag()}
-        set statusline+=%*
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list = 1
-        let g:syntastic_check_on_open = 0
-        let g:syntastic_check_on_wq = 0
-
-        let g:syntastic_javascript_checkers = ['eslint']
-        let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
-        let g:syntastic_javascript_eshint_quiet_messages = { "level": "warnings" }
+    " ale {
+        let g:ale_lint_on_save = 1
+        let g:ale_lint_on_text_changed = 0
     " }
 " }

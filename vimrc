@@ -183,6 +183,8 @@ set nocompatible
     endtry
 
     set ffs=unix,dos,mac                " default file types
+
+    set term=screen-256color
 " }
 
 " Files and Backups {
@@ -310,10 +312,12 @@ set nocompatible
         cno $nb NERDTreeFromBookmark 
     " }
     
-    " NERD Tree {
+    " airline {
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tabline#left_sep = ' '
         let g:airline#extensions#tabline#left_alt_sep = '|'
+
+        let g:airline_powerline_fonts = 1
     " }
 
     " vim-javascript {
